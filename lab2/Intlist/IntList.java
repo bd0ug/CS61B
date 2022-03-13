@@ -81,12 +81,12 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        IntList result = A;
+        IntList result = A;                 // create pointer to go through A
 
-        while (result.rest != null) {
+        while (result.rest != null) {       // want to get to end of A
             result = result.rest;
         }
-        result.rest = B;
+        result.rest = B;                    // so we can add B
 
         return A;
     }
@@ -96,16 +96,16 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        IntList result = new IntList(A.first, null);
+        IntList result = new IntList(A.first, null);        // creating new IntList with A head as first
         IntList ptr = result;
         A = A.rest;
 
         while (A != null) {
-            ptr.rest = new IntList(A.first, null);
+            ptr.rest = new IntList(A.first, null);          // creating new int list for each rest
             A = A.rest;
             ptr = ptr.rest;
         }
-        ptr.rest = B;
+        ptr.rest = B;                                             // finally attatch B to the end of the new list through the pointer
 
         return result;
     }
