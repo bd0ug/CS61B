@@ -48,6 +48,8 @@ public class NBody {
         StdDraw.enableDoubleBuffering();
         StdDraw.setScale(-radiusOfUniverse, radiusOfUniverse);
 
+        // plays music from audio file (doesnt work)
+        StdAudio.play("audio/2001.mid");
 
         while (time < T) {
             int count = 0;
@@ -86,7 +88,7 @@ public class NBody {
 
         }
 
-        // After program is done, print out state of universe
+        // After program is done, print out state of universe (WHY DOESNT IT PRINT)
         System.out.printf("%d\n", bodies.length);
         System.out.printf("%.2e\n", radiusOfUniverse);
         for (int i = 0; i < bodies.length; i++) {

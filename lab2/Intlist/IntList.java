@@ -81,8 +81,14 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList result = A;
+
+        while (result.rest != null) {
+            result = result.rest;
+        }
+        result.rest = B;
+
+        return A;
     }
 
     /**
@@ -90,8 +96,18 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList result = new IntList(A.first, null);
+        IntList ptr = result;
+        A = A.rest;
+
+        while (A != null) {
+            ptr.rest = new IntList(A.first, null);
+            A = A.rest;
+            ptr = ptr.rest;
+        }
+        ptr.rest = B;
+
+        return result;
     }
 
 
@@ -142,7 +158,7 @@ public class IntList {
     }
 
     /**
-     * Returns true iff X is an IntList containing the same sequence of ints
+     * Returns true if X is an IntList containing the same sequence of ints
      * as THIS. Cannot handle IntLists with cycles. You are not expected to
      * read or understand this method.
      */
