@@ -48,22 +48,24 @@ public class ArrayDeque<T> {                                        // of some d
             back = i;               // the current end/back for the new array
         }
 //         if were not using over 25% of the array, cut it in half                          THIS IS SO HARD WTF
-        else if ((double) size / items.length < .25 && (!isEmpty())) {
+        else if ((double) size / items.length < .25 && !isEmpty()) {
             T[] newArray = (T[]) new Object[items.length / 2];
 
             int i = 0;
 
             if (front != -1) {
                 for (int j = front + 1; j < items.length; i++, j++) {
-                    if (i > size) break;
+                    if (i == size) break;
                     newArray[i] = items[j];
                 }
             }
-
-            for (int j = back - 1; j >= 0; i++, j--) {
-                newArray[i] = items[j];
+            if (i != size) {
+                for (int j = back - 1; j >= 0; i++, j--) {
+                    newArray[i] = items[j];
+                }
             }
             front = newArray.length -1;
+            back = i;
 
             items = newArray;                                                           // I literally cant believe I figured this out
         }
