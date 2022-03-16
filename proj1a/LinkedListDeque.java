@@ -40,7 +40,6 @@ public class LinkedListDeque<T> {                 // T --> some data type, whate
             sentinel.next = new ItemNode(item, sentinel.next, sentinel);            // new node pushes rest of list to back
             sentinel.next.next.prev = sentinel.next;                                // value AFTER new node should point to new node for prev
         }
-
         size++;
     }
 
