@@ -49,27 +49,17 @@ public class ArrayDeque<T> {                                        // of some d
         }
 //         if were not using over 25% of the array, cut it in half                          THIS IS SO HARD WTF
         else if ((double) size / items.length < .25 && !isEmpty()) {
-            T[] newArray = (T[]) new Object[items.length / 2];
-
             int i = 0;
-
-            if (front != -1) {
-                for (int j = front + 1; j < items.length; i++, j++) {
-                    if (i == size) break;
-                    newArray[i] = items[j];
-                }
-            }
-            if (i != size) {
-                for (int j = back - 1; j >= 0; i++, j--) {
-                    newArray[i] = items[j];
-                }
-            }
-            front = newArray.length -1;
-            back = i;
+            T[] newArray = (T[]) new Object[items.length / 2];
+            if (front != items.length - 1 && front != -1)
+                System.arraycopy(items, front + 1, newArray, 0, items.length / 2);          // gets front part
+            if (size - back >= 0)             // then theres still some left
+                System.arraycopy(items, 0, newArray, size - back, back);
 
             items = newArray;                                                           // I literally cant believe I figured this out
+            front = newArray.length -1;
+            back = size;
         }
-
     }
 
     /** Add an item to the head of the list, depending on where you are in list */
@@ -127,6 +117,8 @@ public class ArrayDeque<T> {                                        // of some d
     /** Removes the first item of the list while maintaining circularity */
     public void removeFirst() {
         if (!isEmpty()) {
+            resize();
+
             if (front == items.length - 1) {
                 front = 0;
             } else {
@@ -139,6 +131,8 @@ public class ArrayDeque<T> {                                        // of some d
     /** Removes the last item of the list while maintaining circularity */
     public void removeLast() {
         if (!isEmpty()) {
+            resize();
+
             if (back - 1 < 0) {
                 back = items.length - 1;
             } else {
